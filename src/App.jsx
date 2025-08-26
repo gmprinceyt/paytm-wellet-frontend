@@ -1,10 +1,11 @@
+import SingUp from "./pages/Singup"
 
 function App() {
 
   return (
-    <div>
-        Hello world
-    </div>
+    <>
+       <SingUp/>
+    </>
   )
 }
 
