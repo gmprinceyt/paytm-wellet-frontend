@@ -1,14 +1,26 @@
-const Link = ({to, children,...props } )=> {
+// Navigate Event 
+const locationNavigate = new Event("navigate");
 
-    function handler(e){
-        e.preventDefault();
-        history.pushState({}, "", to);
-        const locationNavigate = new Event("navigate");
-        window.dispatchEvent(locationNavigate);
-    }
+// Link
+const Link = ({ to, children, ...props }) => {
+  function handler(e) {
+    e.preventDefault();
+    history.pushState({}, null, to);
+    window.dispatchEvent(locationNavigate);
+  }
+
+  return (
+    <a href={to} onClick={handler} {...props}>
+      {children}
+    </a>
+  );
+};
 
 
-    return <a href={to} onClick={handler} {...props}>{children}</a>
+// Navigate 
+export const Navigate = (to) => {
+  history.replaceState({}, null, to);
+  window.dispatchEvent(locationNavigate);
 };
 
 export default Link;

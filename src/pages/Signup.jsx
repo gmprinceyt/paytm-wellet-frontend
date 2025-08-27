@@ -1,121 +1,107 @@
-// import { useState } from "react";
+import { useEffect, useState } from "react";
+import InputLabel from "../components/ui/Input_label";
+import Button from "../components/ui/Button";
+import { Loader } from "lucide-react";
+import Link, { Navigate } from "../Router/Link";
 
 const Signup = () => {
-  // const [username, setUsername] = useState(null);
-  // const [firstName, setFirstName] = useState(null);
-  // const [lastName, setLastName] = useState(null);
-  // const [password, setpassword] = useState(null);
-  // const [loading, setLoading] = useState(false);
+  const [username, setUsername] = useState(null);
+  const [firstName, setFirstName] = useState(null);
+  const [lastName, setLastName] = useState(null);
+  const [password, setpassword] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  // async function Handler(e) {
-  //   setLoading(true);
-  //   e.preventDefault();
-  //   try {
-  //     const res = await fetch("http://localhost:3000/api/v1/user/signup", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         username,
-  //         firstName,
-  //         lastName,
-  //         password,
-  //       }),
-  //     });
+  async function Handler(e) {
+    setLoading(true);
+    e.preventDefault();
+    try {
+      const res = await fetch("http://localhost:3000/api/v1/user/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username,
+          firstName,
+          lastName,
+          password,
+        }),
+      });
 
-  //     const data = await res.json();
-  //     localStorage.setItem("token", data.token);
-  //     alert(data.message);
-  //   } catch (error) {
-  //     console.log(error);
-  //     alert(error.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
+      const data = await res.json();
+
+      if ("token" in data) {
+        localStorage.setItem("token", data.token);
+        Navigate("/");
+      }
+      alert(data.message);
+    } catch (error) {
+      console.log(error);
+      alert(error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token){
+      // Add Jwt Logic
+      Navigate("/");
+    }
+    console.log(token)
+    window.document.title = "Create Account On Wallet";
+  }, []);
   return (
-    <>
-      <div className="bg-black h-screen flex flex-col justify-center items-center">
-    
-        <form className="max-w-sm mx-auto">
-          <div className="mb-5">
-            <label
-              htmlFor="email"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Your email
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-xs-light"
-              placeholder="name@flowbite.com"
-              required
-            />
-          </div>
-          <div className="mb-5">
-            <label
-              htmlFor="password"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Your password
-            </label>
-            <input
-              type="password"
-              id="password"
-              className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-xs-light"
-              required
-            />
-          </div>
-          <div className="mb-5">
-            <label
-              htmlFor="repeat-password"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            >
-              Repeat password
-            </label>
-            <input
-              type="password"
-              id="repeat-password"
-              className="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-xs-light"
-              required
-            />
-          </div>
-          <div className="flex items-start mb-5">
-            <div className="flex items-center h-5">
-              <input
-                id="terms"
-                type="checkbox"
-                value=""
-                className="w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-                required
-              />
-            </div>
-            <label
-              htmlFor="terms"
-              className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >
-              I agree with the{" "}
-              <a
-                href="#"
-                className="text-blue-600 hover:underline dark:text-blue-500"
-              >
-                terms and conditions
-              </a>
-            </label>
-          </div>
-          <button
-            type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    <div className="bg-black h-screen flex flex-col justify-center items-center m-auto">
+      <h1 class="mb-4 px-8  text-center text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+        Create New Account In Wallet{" "}
+      </h1>
+      <form onSubmit={Handler} className="w-full px-8 lg:w-1/3">
+        <InputLabel
+          type={"text"}
+          label={"Firstname"}
+          onChange={(e) => setFirstName(e.target.value)}
+          placeholder={"Enter Firstname "}
+        />
+        <InputLabel
+          type={"text"}
+          label={"Lastname"}
+          onChange={(e) => setLastName(e.target.value)}
+          placeholder={"Enter Lastname "}
+        />
+        <InputLabel
+          type={"email"}
+          label={"Email"}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder={"Enter Email"}
+        />
+        <InputLabel
+          type={"password"}
+          label={"Password"}
+          onChange={(e) => setpassword(e.target.value)}
+          placeholder={"Enter Password"}
+          className={"bg-rose-400"}
+        />
+        <div className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+          i Have Account in Wallet{" "}
+          <Link
+            to={"/signin"}
+            className="text-blue-600 hover:underline dark:text-blue-500"
           >
-            Register new account
-          </button>
-        </form>
+            Login here
+          </Link>
+        </div>
 
-        
-      </div>
-    </>
+        <Button type="submit" style={"mt-2"}>
+          {loading ? (
+            <Loader className="animate-spin" />
+          ) : (
+            "Register new account"
+          )}
+        </Button>
+      </form>
+    </div>
   );
 };
 
