@@ -3,13 +3,15 @@ import InputLabel from "../components/ui/Input_label";
 import Button from "../components/ui/Button";
 import { Loader } from "lucide-react";
 import Link, { Navigate } from "../Router/Link";
+import { useNotify } from "../Notification/Notification";
 
 const Signup = () => {
-  const [username, setUsername] = useState(null);
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
+  const [username, setUsername] = useState(null);
   const [password, setpassword] = useState(null);
   const [loading, setLoading] = useState(false);
+  const {toast} = useNotify()
 
   async function Handler(e) {
     setLoading(true);
@@ -33,11 +35,12 @@ const Signup = () => {
       if ("token" in data) {
         localStorage.setItem("token", data.token);
         Navigate("/");
+        toast.success(data.message);
       }
-      alert(data.message);
+      toast.info(data.message);
     } catch (error) {
       console.log(error);
-      alert(error.message);
+      toast.error(error.message);
     } finally {
       setLoading(false);
     }
@@ -53,8 +56,8 @@ const Signup = () => {
     window.document.title = "Create Account On Wallet";
   }, []);
   return (
-    <div className="bg-black h-screen flex flex-col justify-center items-center m-auto">
-      <h1 class="mb-4 px-8  text-center text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+    <div className="bg-white h-screen flex flex-col justify-center items-center m-auto">
+      <h1 className="mb-4 px-8  text-center text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
         Create New Account In Wallet{" "}
       </h1>
       <form onSubmit={Handler} className="w-full px-8 lg:w-1/3">

@@ -1,13 +1,13 @@
-import Home from "./pages/Home.";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
-import Link from "./Router/Link";
 import Route from "./Router/Route";
+import Header from "./components/sections/Header";
+import { Home } from "./pages/Home";
 
 function App() {
   return (
     <>
-      {/* <Header/> */}
+      <Header />
       <Route path={"/signup"} Element={<Signup />} />
       <Route path={"/signin"} Element={<Signin />} />
       <Route path={"/"} Element={<Home />} />
@@ -16,13 +16,3 @@ function App() {
 }
 
 export default App;
-
-function Header() {
-  return (
-    <div className="dark:bg-black h-12 flex items-center dark:text-white w-full px-7">
-      <Link to={"/signup"} className="text-red-500">
-        Signup
-      </Link>
-    </div>
-  );
-}
