@@ -11,13 +11,13 @@ const Signup = () => {
   const [username, setUsername] = useState(null);
   const [password, setpassword] = useState(null);
   const [loading, setLoading] = useState(false);
-  const {toast} = useNotify()
+  const { toast, Toaster } = useNotify();
 
   async function Handler(e) {
     setLoading(true);
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:3000/api/v1/user/signup", {
+      const res = await fetch(`${import.meta.env.VITE_SERVER}/user/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,16 +47,11 @@ const Signup = () => {
   }
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token){
-      // Add Jwt Logic
-      Navigate("/");
-    }
-    console.log(token)
     window.document.title = "Create Account On Wallet";
   }, []);
   return (
     <div className="bg-white h-screen flex flex-col justify-center items-center m-auto">
+      {Toaster}
       <h1 className="mb-4 px-8  text-center text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
         Create New Account In Wallet{" "}
       </h1>

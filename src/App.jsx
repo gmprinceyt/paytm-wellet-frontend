@@ -3,6 +3,7 @@ import Signup from "./pages/Signup";
 import Route from "./Router/Route";
 import Header from "./components/sections/Header";
 import { Home } from "./pages/Home";
+import Transfer from "./pages/Transfer";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Route path={"/signup"} Element={<Signup />} />
       <Route path={"/signin"} Element={<Signin />} />
       <Route path={"/"} Element={<Home />} />
+      <Route path={"/transfer/:id"} Element={<Transfer />} />
     </>
   );
 }

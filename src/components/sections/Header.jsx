@@ -1,13 +1,10 @@
 import Link from "../../Router/Link";
 import Button from "../ui/Button";
-import { useNotify } from "../../Notification/Notification"
 
 export default function Header() {
-  const { Toaster } = useNotify();
   const user = localStorage.getItem("token");
   return (
     <nav className="bg-white text-black border-gray-200 flex justify-between px-7 py-2">
-      {Toaster}
       <Link to={"/"} className=" flex items-center">
         <h2 className="mb-4 px-8  text-center text-xl font-extrabold leading-none tracking-tight text-gray-900">
           Wallet

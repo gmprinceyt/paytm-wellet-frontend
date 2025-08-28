@@ -1,4 +1,4 @@
-// Navigate Event 
+// Navigate Event
 const locationNavigate = new Event("navigate");
 
 // Link
@@ -16,11 +16,11 @@ const Link = ({ to, children, ...props }) => {
   );
 };
 
-
-// Navigate 
+// Navigate
 export const Navigate = (to) => {
   history.replaceState({}, null, to);
   window.dispatchEvent(locationNavigate);
+  window.location.reload();
 };
 
 export default Link;
