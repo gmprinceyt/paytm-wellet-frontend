@@ -11,7 +11,6 @@ export const Home = () => {
   const [filter, setFilter] = useState("");
   const [balance, setBalance] = useState(0);
   const filterValue = useDebounce(filter, 200);
-  console.log(filterValue);
 
   async function getUsers() {
     try {
@@ -50,9 +49,9 @@ export const Home = () => {
   }, []);
 
   return (
-    <div className="px-4 w-full m-auto md:w-1/2">
-      {Toaster}
+    <div className="p-4 rounded-xl w-full mx-auto md:w-1/2 bg-neutral-100">
       <Balance value={balance} />
+      {Toaster}
       <div className="my-2">
         <InputLabel
           type="text"
@@ -69,7 +68,7 @@ export const Home = () => {
       </div>
     </div>
   );
-};
+};  
 
 export const Balance = ({ value }) => {
   return (

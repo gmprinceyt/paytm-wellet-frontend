@@ -13,7 +13,10 @@ const Route = ({ path, Element }) => {
       window.removeEventListener("navigate", navigate);
     };
   }, []);
-  return currentPath === path ? Element : null;
+
+  const DynamicPath = path.split("/")[1];
+  const DyncurrentPath = currentPath.split("/")[1];
+  return DyncurrentPath === DynamicPath ? Element : null;
 };
 
 export default Route;
