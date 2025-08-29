@@ -5,7 +5,7 @@ import { Loader } from "lucide-react";
 import Link, { Navigate } from "../Router/Link";
 import { useNotify } from "../Notification/Notification";
 
-const Signup = () => {
+const   Signup = () => {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
   const [username, setUsername] = useState(null);

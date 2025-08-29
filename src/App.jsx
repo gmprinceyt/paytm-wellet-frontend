@@ -4,6 +4,7 @@ import Route from "./Router/Route";
 import Header from "./components/sections/Header";
 import { Home } from "./pages/Home";
 import Transfer from "./pages/Transfer";
+import Authoticated from "./components/sections/Protected";
 
 function App() {
   return (
@@ -11,8 +12,22 @@ function App() {
       <Header />
       <Route path={"/signup"} Element={<Signup />} />
       <Route path={"/signin"} Element={<Signin />} />
-      <Route path={"/"} Element={<Home />} />
-      <Route path={"/transfer/"} Element={<Transfer />} />
+      <Route
+        path={"/"}
+        Element={
+          <Authoticated>
+            <Home />
+          </Authoticated>
+        }
+      />
+      <Route
+        path={"/transfer/"}
+        Element={
+          <Authoticated>
+            <Transfer />
+          </Authoticated>
+        }
+      />
     </>
   );
 }
